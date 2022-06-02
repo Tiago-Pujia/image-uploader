@@ -1,3 +1,23 @@
+// Lanzar un nuevo mensaje
+const createdToast = (title, time, message) => {
+    const toastContainer = document.querySelector("#toastContainer");
+    const template = document.querySelector("#toast");
+    const newTemplate = template.content.cloneNode(true);
+
+        newTemplate.querySelector(".toast-title").innerHTML = title;
+        newTemplate.querySelector(".toast-time").innerHTML = time;
+        newTemplate.querySelector(".toast-message").innerHTML = message;
+
+    toastContainer.append(newTemplate);
+
+    const newToast = toastContainer.lastElementChild;
+
+    let newToastClass = new bootstrap.Toast(newToast);
+        newToastClass.show();
+
+    return true;
+};
+
 // Movimiento Barra de progreso
 const transformPxNumber = (px) => Number(px.replace("px", ""));
 
@@ -68,7 +88,7 @@ const changeCard = (cardID) => {
     return true;
 };
 
-// ===============
+// Envio de Formulario
 
 const tagShowError = document.querySelector("#formCard1 .invalid-feedback");
 
@@ -88,9 +108,7 @@ const formCompleteSubmit = () => {
             urlResult.value = response;
             previewImg();
         })
-        .then(() => 
-            changeCard("cardResult")
-        )
+        .then(() => changeCard("cardResult"))
 
         .catch((error) => {
             tagShowError.textContent = error;
@@ -103,3 +121,12 @@ const formCompleteSubmit = () => {
 };
 
 inputFile.addEventListener("change", formCompleteSubmit);
+
+// Boton para copiar link
+const buttonCopyLink = document.querySelector("#copyLink");
+
+buttonCopyLink.addEventListener("click", () => {
+    urlResult.select();
+    document.execCommand("copy");
+    createdToast("New Message", "Just Now", "Copied to clipboard successfully");
+});

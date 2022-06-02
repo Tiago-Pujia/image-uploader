@@ -33,6 +33,23 @@
                 cursor: pointer;
             }
         </style>
+
+        <template id="toast">
+                <div class="toast fade">
+                    <div class="toast-header">
+                        <i class="bi bi-square-fill text-primary fs-5 me-2"></i>
+                        <strong class="me-auto toast-title">
+                            TITLE
+                        </strong>
+                        <small class="toast-time">TIME</small>
+                        <button class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">
+                        <p class="m-0 toast-message">MESSAGE</p>
+                    </div>
+                </div>
+            </div>
+        </template>
     </head>
     <body class="bg-light">
         <div class="container-md">
@@ -106,8 +123,8 @@
                             <img src="" id="inputFilePreviewer" class="img-fluid" style="border-radius: 10px;">
                         </div>
                         <div class="input-group mt-4" style="font-size: .8em ;">
-                            <input class="form-control w-25" style="font-size: inherit;" type="text" value="asd" readonly id="urlResult">
-                            <button class="btn btn-primary rounded" style="font-size: inherit;">Copy Link</button>
+                            <input class="form-control w-25" style="font-size: inherit;" type="text" readonly id="urlResult">
+                            <button class="btn btn-primary rounded" style="font-size: inherit;" id="copyLink">Copy Link</button>
                         </div>  
                     </div>
                 </div>
@@ -121,5 +138,6 @@
 
             </div>
         </div>
+        <div class="toast-container position-fixed bottom-0 end-0 m-3" id="toastContainer"></div>
     </body>
 </html>
