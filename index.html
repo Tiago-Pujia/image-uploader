@@ -9,11 +9,13 @@
         <!-- Frameworks -->
             <!-- Bootstrap -->
             <link rel="stylesheet" href="independences/bootstrap/bootstrap.min.css"/>
-            <link rel="stylesheet" href="independences/bootstrap-icons/font/bootstrap-icons.css"/>
             <script src="independences/bootstrap/bootstrap.bundle.min.js"></script>
 
+            <!-- Bootstrap Icon -->
+            <link rel="stylesheet" href="independences/bootstrap-icons/font/bootstrap-icons.css"/>
+
             <!-- Fuente de Letra -->
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"/>
+            <link rel="stylesheet" href="independences/font-poppins.css"/>
         
         <!-- scripts -->
         <script src="index.js" defer></script>
@@ -45,7 +47,7 @@
                         <p class="text-muted my-4">
                             File should be Jpeg, Png, ...
                         </p>
-                        <form class="my-3 px-5" style="height: 250px;" id="formCard1" enctype="multipart/form-data">
+                        <form class="my-3 px-5 needs-validation" style="height: 250px;" id="formCard1" enctype="multipart/form-data" novalidate>
                             <label
                                 class="
                                 border border-info rounded bg-light w-100 h-100 mx-auto 
@@ -70,7 +72,9 @@
                                 name="img"
                                 type="file"
                                 accept="image/jpg, image/png, image/jpeg"
+                                required
                             />
+                            <div class="invalid-feedback mb-3">Error</div>
                         </form>
                         <p class="text-muted my-4">Or</p>
                         <div>
@@ -102,7 +106,7 @@
                             <img src="" id="inputFilePreviewer" class="img-fluid" style="border-radius: 10px;">
                         </div>
                         <div class="input-group mt-4" style="font-size: .8em ;">
-                            <input class="form-control w-25" style="font-size: inherit;" type="text" value="asd" readonly>
+                            <input class="form-control w-25" style="font-size: inherit;" type="text" value="asd" readonly id="urlResult">
                             <button class="btn btn-primary rounded" style="font-size: inherit;">Copy Link</button>
                         </div>  
                     </div>
