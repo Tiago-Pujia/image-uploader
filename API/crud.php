@@ -65,11 +65,12 @@ class CRUD extends BD {
             $response = $this->db_connection->prepare($sqlQuery);
             $response->bindParam(':IMG', $blob, PDO::PARAM_LOB);
             $response->bindParam(':IP_ADDRESS', $ip_address);
-            $response = $response->execute();
+            $response->execute();
+            $idImg = $this->db_connection->lastInsertId();
 
             $this->disconnect();
 
-            return $response;
+            return $idImg;
         } catch (PDOException $e) {
             return 'Error';
         }

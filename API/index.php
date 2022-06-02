@@ -2,13 +2,14 @@
 include_once "crud.php";
 
 header("Content-type: application/json");
+http_response_code(500);
+
+if (!isset($_FILES['img'])) return('Please select a image');
 
 $file = $_FILES['img'];
 
 // Validación de Datos
 function validateFileToImg($file){
-    if (!isset($file)) return('Please select a image');
-
     if($file['error'] != 0) return('The image contains errors');
     if($file['size'] >= 16777215) return('The maximum size is 16mb');
     
@@ -48,9 +49,10 @@ if($fileResult != 1){
 $user_image_path = $file['tmp_name'];
 $user_ip = $_SERVER['REMOTE_ADDR'];
 $insertImg = $crud->insertBlob($user_image_path,$user_ip);
+$server_name = $_SERVER['SERVER_NAME'];
 
 http_response_code(201);
 echo json_encode([
     'status' => 1, 
-    'response' => $insertImg
+    'response' => "http://$server_name/previewImg?photoid=$insertImg"
 ]);
