@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Subir Imagenes</title>
+
+        <!-- Frameworks -->
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="independences/bootstrap/bootstrap.min.css"/>
+            <script src="independences/bootstrap/bootstrap.bundle.min.js"></script>
+
+            <!-- Bootstrap Icon -->
+            <link rel="stylesheet" href="independences/bootstrap-icons/font/bootstrap-icons.css"/>
+
+            <!-- Fuente de Letra -->
+            <link rel="stylesheet" href="independences/font-poppins.css"/>
+        
+        <!-- scripts -->
+        <script src="index.js" defer></script>
+
+        <!-- Estilos Varios -->
+        <style>
+            body {
+                font-family: "Poppins", sans-serif;
+            }
+
+            #formCard1:hover > label,
+            #labelCard:hover,
+            #labelCard:hover img{
+                background-color: var(--bs-gray-200) !important;
+                cursor: pointer;
+            }
+        </style>
+
+        <template id="toast">
+                <div class="toast fade">
+                    <div class="toast-header">
+                        <i class="bi bi-square-fill text-primary fs-5 me-2"></i>
+                        <strong class="me-auto toast-title">
+                            TITLE
+                        </strong>
+                        <small class="toast-time">TIME</small>
+                        <button class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">
+                        <p class="m-0 toast-message">MESSAGE</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </head>
+    <body class="bg-light">
+        <div class="container-md">
+            <div class="row flex-column align-items-center justify-content-center" style="min-height: 95vh">
+
+                <!-- Card1, formulario -->
+                <div class="col-md-5 card py-3 shadow" style="border-radius: 15px" id="cardForm">
+                    <div class="card-body text-center row flex-column align-items-center">
+                        <h2 class="card-title h4 m-0 text-dark">
+                            Upload Your Image
+                        </h2>
+                        <p class="text-muted my-4">
+                            File should be Jpeg, Png, ...
+                        </p>
+                        <form class="my-3 px-5 needs-validation" style="height: 250px;" id="formCard1" enctype="multipart/form-data" novalidate>
+                            <label
+                                class="
+                                border border-info rounded bg-light w-100 h-100 mx-auto 
+                                row flex-column align-items-center justify-content-evenly
+                                "
+                                style="
+                                    border-style: dashed !important;
+                                    border-width: 2px !important;
+                                "
+                                id="labelCard"
+                                for="inputFile"
+                            >
+                                <img src="img/FormlabelBackground.png" class="img-fluid w-50">
+                                <p class="text-secondary text-center m-0">
+                                        Drag & Drop your image here
+                                </p>
+                            </label>
+
+                            <input
+                                class="d-none"
+                                id="inputFile"
+                                name="img"
+                                type="file"
+                                accept="image/jpg, image/png, image/jpeg"
+                                required
+                            />
+                            <div class="invalid-feedback mb-3">Error</div>
+                        </form>
+                        <p class="text-muted my-4">Or</p>
+                        <div>
+                            <label class="btn btn-primary p-2" style="border-radius: 8px;" for="inputFile">
+                                Choose a file
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card2, cargador de subida de imagen -->
+                <div class="d-none col-md-4 card shadow" id="cardLoad">
+                    <div class="card-body p-4">
+                        <h2 class="card-title h5 my-3 mb-4 text-dark">Uploading...</h2>
+                        <div class="bg-light border border-muted rounded overflow-hidden" style="height: 8px;" id="progressbar">
+                            <div class="bg-primary rounded h-100 w-25" id="progress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card3, resultado final -->
+                <div class="d-none col-md-4 card shadow py-3" id="cardResult">
+                    <div class="card-body text-center">
+                        <div class="mb-2">
+                            <i class="bi bi-check-circle-fill h1 text-success"></i>
+                        </div>
+                        <h2 class="card-title h5 text-dark mb-4">Uploaded Successfully!</h2>
+                        <div>
+                            <img src="" id="inputFilePreviewer" class="img-fluid" style="border-radius: 10px;">
+                        </div>
+                        <div class="input-group mt-4" style="font-size: .8em ;">
+                            <input class="form-control w-25" style="font-size: inherit;" type="text" readonly id="urlResult">
+                            <button class="btn btn-primary rounded" style="font-size: inherit;" id="copyLink">Copy Link</button>
+                        </div>  
+                    </div>
+                </div>
+
+            </div>
+            <div class="row flex-column align-items-center justify-content-end" style="min-height: 5vh">
+
+                <div class="text-center text-secondary">
+                    <p>created by <strong class="text-decoration-underline">Tiago Pujia</strong> - devChallenges.io</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="toast-container position-fixed bottom-0 end-0 m-3" id="toastContainer"></div>
+    </body>
+</html>
