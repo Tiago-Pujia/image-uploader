@@ -26,6 +26,24 @@
                 font-family: "Poppins", sans-serif;
             }
         </style>
+
+    <!-- Templates -->
+    <template id="toast">
+        <div class="toast fade">
+            <div class="toast-header">
+                <i class="bi bi-square-fill text-primary fs-5 me-2"></i>
+                <strong class="me-auto toast-title">
+                    TITLE
+                </strong>
+                <small class="toast-time">TIME</small>
+                <button class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                <p class="m-0 toast-message">MESSAGE</p>
+            </div>
+        </div>
+    </div>
+    </template>
 </head>
 <body class="bg-light">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -54,25 +72,24 @@
         </div>
     </nav>
 
-    <main class="container-md py-5" style="min-height: 90vh;">
-        <div class="d-none d-flex row justify-content-center align-items-center" id="main">
-            <div class="card col-md-6 shadow bg-light p-2" style="border-radius: 15px">
-                <div class="card-body d-flex row">
-                    <img class="col-12 img-fluid w-100" id="photo" src="..." alt="Error">
-                    <hr class="col-12 my-3">
-                    <div class="col-8">
-                        Views: <span id="views"></span>
+    <main class="container-md" >
+        <div class="d-none d-md-flex justify-content-center align-items-center" style="min-height: 90vh;" id="main">
+
+            <div class="card shadow p-0 mx-auto" style="max-width: 600px;">
+                <img class="card-img-top" id="photo" src="..." alt="Error">
+                <div class="card-body">
+                    <div class="row w-100 px-auto">
+                        <span class="col-4 p-0 text-muted text-center text-decoration-underline">
+                            Views: <span id="views"></span>
+                        </span>
+                        <div class="col-8 p-0 text-end">
+                            <button class="btn btn-primary" id="shareLink" title="Share Photo" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-share"></i></button>
+                            <a class="btn btn-primary" id="download" href="" download="photo.jpg" title="Download" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-download"></i></a>     
+                        </div>    
                     </div>
-                    <!-- Arreglar boton de descarga -->
-                    <!-- <div class="col-4">
-                        <div class="btn btn-primary ms-auto">
-                            <a class="text-white text-decoration-none" id="download" href="/API/index.php?photoid=4" download="photo.jpg">
-                                Download
-                            </a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
+            
         </div>
 
         <div class="d-none text-center text-danger fw-bold" id="alertError">
@@ -89,5 +106,7 @@
             <p class="m-0">created by <strong class="text-decoration-underline">Tiago Pujia</strong> - devChallenges.io</p>
         </div>
     </footer>
+
+    <div class="toast-container position-fixed bottom-0 end-0 m-3" id="toastContainer"></div>
 </body>
 </html>

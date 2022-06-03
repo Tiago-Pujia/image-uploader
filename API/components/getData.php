@@ -22,6 +22,7 @@ if(isset($_GET['views']) && isset($id_img)){
         exit();
     }
     
+    http_response_code(200);
     header('Content-type: image/jpg');
     exit($response);
 } 

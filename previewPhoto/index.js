@@ -1,5 +1,24 @@
-// Obtenemos el ID de la imagen
+// Lanzar un nuevo mensaje
+const createdToast = (title, time, message) => {
+    const toastContainer = document.querySelector("#toastContainer");
+    const template = document.querySelector("#toast");
+    const newTemplate = template.content.cloneNode(true);
 
+        newTemplate.querySelector(".toast-title").innerHTML = title;
+        newTemplate.querySelector(".toast-time").innerHTML = time;
+        newTemplate.querySelector(".toast-message").innerHTML = message;
+
+    toastContainer.append(newTemplate);
+
+    const newToast = toastContainer.lastElementChild;
+
+    let newToastClass = new bootstrap.Toast(newToast);
+        newToastClass.show();
+
+    return true;
+};
+
+// Obtenemos el ID de la imagen
 const photo = document.querySelector("#photo");
 
 const photoId = (() => {
@@ -16,7 +35,9 @@ const writeUrlFields = (id) => {
     let urlImg = "/API/index.php?photoid=" + id;
 
     photo.src = urlImg;
-    // buttonDownload.href = urlImg;
+    buttonDownload.href = urlImg;
+
+    return true;
 };
 
 writeUrlFields(photoId);
@@ -46,10 +67,31 @@ const writeNumberViews = (() => {
     return views;
 })();
 
+// Boton de copiar el link para compartir foto
+const buttonShareLink = document.querySelector("#shareLink");
+
+buttonShareLink.addEventListener("click", () => {
+    let aux = document.createElement("input");
+    aux.value = location.href;
+
+    document.body.appendChild(aux);
+
+    aux.select();
+    document.execCommand("copy");
+
+    document.body.removeChild(aux);
+
+    createdToast("New Message", "Just Now", "Copied to clipboard successfully");
+});
+
 // Sumar visitas
-(() => {
-    fetch("/API/index.php", {
-        method: "PUT",
-        body: JSON.stringify({ photoid: photoId }),
-    });
-})();
+
+fetch("/API/index.php", {
+    method: "PUT",
+    body: JSON.stringify({ photoid: photoId }),
+});
+
+// Activamos los Tooltips
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
