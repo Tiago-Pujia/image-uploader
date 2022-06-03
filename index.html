@@ -52,8 +52,34 @@
         </template>
     </head>
     <body class="bg-light">
-        <div class="container-md">
-            <div class="row flex-column align-items-center justify-content-center" style="min-height: 95vh">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="/">
+                    <i class="bi bi-globe2 fs-3 me-2"></i>Image Uploader
+                </a>
+
+                <div class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav1-collapse">
+                    <div class="navbar-toggler-icon"></div>
+                </div>
+
+                <div class="navbar-collapse collapse" id="nav1-collapse">
+                    <hr class="d-md-none border border-info">
+                    <div class="navbar-nav ms-auto">
+                        <div class="nav-item text-capitalize">
+                            <a class="nav-link" href="/"><i class="bi bi-box-arrow-up-left me-2"></i>Upload Photo</a>
+                        </div>
+                        <div class="nav-item text-capitalize">
+                            <a class="nav-link" href="/allPhotos/"><i class="bi bi-images me-2"></i>See all photos</a>
+                        </div>
+                    </div>      
+                </div>
+
+            </div>
+        </nav>
+        
+        <main class="container-md">
+            <div class="row flex-column align-items-center justify-content-center" style="min-height: 90vh">
 
                 <!-- Card1, formulario -->
                 <div class="col-md-5 card py-3 shadow" style="border-radius: 15px" id="cardForm">
@@ -103,7 +129,7 @@
                 </div>
 
                 <!-- Card2, cargador de subida de imagen -->
-                <div class="d-none col-md-4 card shadow" id="cardLoad">
+                <div class="d-none col-md-4 card shadow" id="cardLoad" style="border-radius: 15px">
                     <div class="card-body p-4">
                         <h2 class="card-title h5 my-3 mb-4 text-dark">Uploading...</h2>
                         <div class="bg-light border border-muted rounded overflow-hidden" style="height: 8px;" id="progressbar">
@@ -113,7 +139,7 @@
                 </div>
 
                 <!-- Card3, resultado final -->
-                <div class="d-none col-md-4 card shadow py-3" id="cardResult">
+                <div class="d-none col-md-4 card shadow py-3" id="cardResult" style="border-radius: 15px">
                     <div class="card-body text-center">
                         <div class="mb-2">
                             <i class="bi bi-check-circle-fill h1 text-success"></i>
@@ -122,22 +148,25 @@
                         <div>
                             <img src="" id="inputFilePreviewer" class="img-fluid" style="border-radius: 10px;">
                         </div>
-                        <div class="input-group mt-4" style="font-size: .8em ;">
+                        <div class="input-group my-4" style="font-size: .8em ;">
                             <input class="form-control w-25" style="font-size: inherit;" type="text" readonly id="urlResult">
                             <button class="btn btn-primary rounded" style="font-size: inherit;" id="copyLink">Copy Link</button>
-                        </div>  
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" onclick="changeCard('cardForm')">Go Back</button>
+                        </div>
                     </div>
                 </div>
 
             </div>
-            <div class="row flex-column align-items-center justify-content-end" style="min-height: 5vh">
+        </main>
 
-                <div class="text-center text-secondary">
-                    <p>created by <strong class="text-decoration-underline">Tiago Pujia</strong> - devChallenges.io</p>
-                </div>
-
+        <footer>
+            <div class="text-center text-secondary">
+                <p class="m-0">created by <strong class="text-decoration-underline">Tiago Pujia</strong> - devChallenges.io</p>
             </div>
-        </div>
+        </footer>
+
         <div class="toast-container position-fixed bottom-0 end-0 m-3" id="toastContainer"></div>
     </body>
 </html>

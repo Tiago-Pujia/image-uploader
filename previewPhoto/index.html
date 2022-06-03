@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Frameworks -->
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="/independences/bootstrap/bootstrap.min.css"/>
+            <script src="/independences/bootstrap/bootstrap.bundle.min.js"></script>
+
+            <!-- Bootstrap Icon -->
+            <link rel="stylesheet" href="/independences/bootstrap-icons/font/bootstrap-icons.css"/>
+
+            <!-- Fuente de Letra -->
+            <link rel="stylesheet" href="/independences/font-poppins.css"/>
+        
+        <!-- scripts -->
+        <script src="index.js" defer></script>
+
+        <!-- Estilos Varios -->
+        <style>
+            body {
+                font-family: "Poppins", sans-serif;
+            }
+        </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-globe2 fs-3 me-2"></i>Image Uploader
+            </a>
+
+            <div class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav1-collapse">
+                <div class="navbar-toggler-icon"></div>
+            </div>
+
+            <div class="navbar-collapse collapse" id="nav1-collapse">
+                <hr class="d-md-none border border-info">
+                <div class="navbar-nav ms-auto">
+                    <div class="nav-item text-capitalize">
+                        <a class="nav-link" href="/"><i class="bi bi-box-arrow-up-left me-2"></i>Upload Photo</a>
+                    </div>
+                    <div class="nav-item text-capitalize">
+                        <a class="nav-link" href="/allPhotos/"><i class="bi bi-images me-2"></i>See all photos</a>
+                    </div>
+                </div>      
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="container-md py-5" style="min-height: 90vh;">
+        <div class="d-none d-flex row justify-content-center align-items-center" id="main">
+            <div class="card col-md-6 shadow bg-light p-2" style="border-radius: 15px">
+                <div class="card-body d-flex row">
+                    <img class="col-12 img-fluid w-100" id="photo" src="..." alt="Error">
+                    <hr class="col-12 my-3">
+                    <div class="col-8">
+                        Views: <span id="views"></span>
+                    </div>
+                    <!-- Arreglar boton de descarga -->
+                    <!-- <div class="col-4">
+                        <div class="btn btn-primary ms-auto">
+                            <a class="text-white text-decoration-none" id="download" href="/API/index.php?photoid=4" download="photo.jpg">
+                                Download
+                            </a>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="d-none text-center text-danger fw-bold" id="alertError">
+            <div class="display-1">Image Not Found</div>
+        </div>
+
+        <div class="text-center mx-auto" style="height: 10rem; width: 10rem;" id="spinnerPhoto">
+            <div class="spinner-border h-100 w-100" style="border-width: 1rem;"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="text-center text-secondary">
+            <p class="m-0">created by <strong class="text-decoration-underline">Tiago Pujia</strong> - devChallenges.io</p>
+        </div>
+    </footer>
+</body>
+</html>

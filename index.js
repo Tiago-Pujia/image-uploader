@@ -69,7 +69,7 @@ const submitData = () => {
     let data = new FormData();
     data.append("img", inputFile.files[0]);
 
-    let petition = fetch("api/index.php", { method: "POST", body: data });
+    let petition = fetch("/API/index.php", { method: "POST", body: data });
 
     return petition;
 };
