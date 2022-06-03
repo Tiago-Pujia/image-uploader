@@ -18,6 +18,8 @@
             <link rel="stylesheet" href="/independences/font-poppins.css"/>
         
         <!-- scripts -->
+        <script src="/scripts/HTMLInclude.js" defer></script>
+        <script src="/scripts/toast.js" defer></script>
         <script src="index.js" defer></script>
 
         <!-- Estilos Varios -->
@@ -28,49 +30,10 @@
         </style>
 
     <!-- Templates -->
-    <template id="toast">
-        <div class="toast fade">
-            <div class="toast-header">
-                <i class="bi bi-square-fill text-primary fs-5 me-2"></i>
-                <strong class="me-auto toast-title">
-                    TITLE
-                </strong>
-                <small class="toast-time">TIME</small>
-                <button class="btn-close" data-bs-dismiss="toast"></button>
-            </div>
-            <div class="toast-body">
-                <p class="m-0 toast-message">MESSAGE</p>
-            </div>
-        </div>
-    </div>
-    </template>
+    <html-include src="/templates/toast.html"></html-include>
 </head>
 <body class="bg-light">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="container-fluid">
-
-            <a class="navbar-brand" href="/">
-                <i class="bi bi-globe2 fs-3 me-2"></i>Image Uploader
-            </a>
-
-            <div class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav1-collapse">
-                <div class="navbar-toggler-icon"></div>
-            </div>
-
-            <div class="navbar-collapse collapse" id="nav1-collapse">
-                <hr class="d-md-none border border-info">
-                <div class="navbar-nav ms-auto">
-                    <div class="nav-item text-capitalize">
-                        <a class="nav-link" href="/"><i class="bi bi-box-arrow-up-left me-2"></i>Upload Photo</a>
-                    </div>
-                    <div class="nav-item text-capitalize">
-                        <a class="nav-link" href="/allPhotos/"><i class="bi bi-images me-2"></i>See all photos</a>
-                    </div>
-                </div>      
-            </div>
-
-        </div>
-    </nav>
+    <html-include src="/templates/navbar.html"></html-include>
 
     <main class="container-md" >
         <div class="d-none d-md-flex justify-content-center align-items-center" style="min-height: 90vh;" id="main">
@@ -101,12 +64,6 @@
         </div>
     </main>
 
-    <footer>
-        <div class="text-center text-secondary">
-            <p class="m-0">created by <strong class="text-decoration-underline">Tiago Pujia</strong> - devChallenges.io</p>
-        </div>
-    </footer>
-
-    <div class="toast-container position-fixed bottom-0 end-0 m-3" id="toastContainer"></div>
+    <html-include src="/templates/footer.html"></html-include>
 </body>
 </html>

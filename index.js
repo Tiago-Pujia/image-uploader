@@ -1,23 +1,3 @@
-// Lanzar un nuevo mensaje
-const createdToast = (title, time, message) => {
-    const toastContainer = document.querySelector("#toastContainer");
-    const template = document.querySelector("#toast");
-    const newTemplate = template.content.cloneNode(true);
-
-        newTemplate.querySelector(".toast-title").innerHTML = title;
-        newTemplate.querySelector(".toast-time").innerHTML = time;
-        newTemplate.querySelector(".toast-message").innerHTML = message;
-
-    toastContainer.append(newTemplate);
-
-    const newToast = toastContainer.lastElementChild;
-
-    let newToastClass = new bootstrap.Toast(newToast);
-        newToastClass.show();
-
-    return true;
-};
-
 // Movimiento Barra de progreso
 const transformPxNumber = (px) => Number(px.replace("px", ""));
 
