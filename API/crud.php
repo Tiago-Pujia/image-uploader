@@ -27,9 +27,6 @@ class BD {
 }
 
 class CRUD extends BD {
-
-    // Metodos innecesarios por ahora
-    /* 
     public function query($query){
         try {
             $this->connect();
@@ -53,7 +50,6 @@ class CRUD extends BD {
             return 'Error';
         }
     } 
-    */
 
     public function insertBlob($filePath, $ip_address) {
         try {
@@ -72,6 +68,18 @@ class CRUD extends BD {
 
             return $idImg;
         } catch (PDOException $e) {
+            return 'Error';
+        }
+    }
+
+    public function store_procedure($query){
+        try {
+            $this->connect();
+            $response = $this->db_connection->query($query);
+            $this->disconnect();
+
+            return $response;
+        } catch (PDOException $e){
             return 'Error';
         }
     }

@@ -1,22 +1,36 @@
+-- Base de Datos
 DROP DATABASE IF EXISTS db_ium;
 CREATE DATABASE IF NOT EXISTS db_ium CHARACTER SET utf8;
 
 USE db_ium;
 
+-- Tablas
 CREATE TABLE tbl_imgs (
     ID_IMG INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     IMG MEDIUMBLOB NOT NULL,
-    VIEWS INT DEFAULT 0,
+    VIEWS INT UNSIGNED DEFAULT 1,
     IP_ADDRESS VARCHAR(50) NOT NULL,
     DATE_CREATION DATETIME NOT NULL DEFAULT now(),
     DATE_DISABLED DATETIME
 ) ENGINE = MyISAM;
 
+-- Vistas
 CREATE VIEW vw_imgs AS
-    SELECT IMG, VIEWS FROM tbl_imgs WHERE DATE_DISABLED IS NULL;
+    SELECT ID_IMG, IMG, VIEWS FROM tbl_imgs WHERE DATE_DISABLED IS NULL;
 
+-- Procedimientos Almacenados
+DELIMITER //
+
+CREATE PROCEDURE addView(id_img INT UNSIGNED)
+BEGIN
+    UPDATE tbl_imgs SET VIEWS = VIEWS + 1 WHERE tbl_imgs.ID_IMG = id_img;
+END//
+
+DELIMITER ;
+
+-- Usuarios
 DROP USER IF EXISTS 'user_api'@'localhost';
 CREATE USER IF NOT EXISTS 'user_api'@'localhost' IDENTIFIED BY 'peluza';
 
-GRANT select,insert ON db_ium.* TO 'user_api'@'localhost';
+GRANT select,insert,update,EXECUTE  ON db_ium.* TO 'user_api'@'localhost';
 FLUSH PRIVILEGES;
