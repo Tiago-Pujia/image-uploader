@@ -1,46 +1,55 @@
-// Obtenemos el ID de la imagen
+// Obtenemos el ID de la imagen y creamos la URL de Obtensión de esta
 const photo = document.querySelector("#photo");
-
 const photoId = (() => {
     let url = new URL(location);
     let photoid = url.searchParams.get("photoid");
-
     return photoid;
 })();
+const photoURL = ((id)=>`/API/index.php?action=imgJPG&photoid=${id}`)(photoId)
 
 // Escribimos en los respectivos campos la URL de la imagen
-const writeUrlFields = (id) => {
+const writeUrlFields = (url) => {
     const buttonDownload = document.querySelector("#download");
-
-    let urlImg = "/API/index.php?photoid=" + id;
-
-    photo.src = urlImg;
-    buttonDownload.href = urlImg;
-
+        buttonDownload.href = url;
     return true;
 };
 
-writeUrlFields(photoId);
+writeUrlFields(photoURL);
 
-// photo.addEventListener("error", () => {
-//     document.querySelector("#main").classList.add("d-none");
-//     document.querySelector("#alertError").classList.remove("d-none");
-//     document.querySelector("#spinnerPhoto").classList.add("d-none");
-// });
+// Insertamos La foto principal en el documento
+const createImg = (src) => {
+    const card = document.querySelector("#card-photo");
+    let newImg = document.createElement("img");
+    let containerCard = document.querySelector('#containerCard');
 
-photo.addEventListener("load", (e) => {
-    document.querySelector("#spinnerPhoto").classList.add("d-none");
-    document.querySelector("#main").classList.remove("d-none");
-});
+    newImg.setAttribute("src", src);
+    newImg.setAttribute("id", "photo");
+    newImg.classList.add("card-img-top");
+
+    newImg.addEventListener("error", () => {
+        document.querySelector("#spinnerPhoto").classList.add("d-none");
+        document.querySelector("#alertError").classList.remove("d-none");
+    });
+
+    newImg.addEventListener("load", () => {
+        containerCard.classList.remove("d-none");
+        containerCard.classList.add('d-md-flex')
+        document.querySelector("#spinnerPhoto").classList.add("d-none");
+    });
+
+    card.prepend(newImg);
+    return true;
+};
+
+createImg(photoURL);
 
 // Mostramos el numero de visitas
-
 const elementViews = document.querySelector("#views");
 
 const writeNumberViews = (() => {
     let views;
 
-    fetch(`/API/?photoid=${photoId}&views=0`, { method: "GET" })
+    fetch(`/API/?action=viewsImg&photoid=${photoId}`, { method: "GET" })
         .then((response) => response.text())
         .then((response) => (elementViews.textContent = response));
 
@@ -65,13 +74,11 @@ buttonShareLink.addEventListener("click", () => {
 });
 
 // Sumar visitas
-
 fetch("/API/index.php", {
     method: "PUT",
     body: JSON.stringify({ photoid: photoId }),
 });
 
 // Activamos los Tooltips
-
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
