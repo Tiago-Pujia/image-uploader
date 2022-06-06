@@ -1,29 +1,22 @@
 <?php
+if(!isset($_GET['action'])) exit('Please define an action');;
 
-if(!isset($_GET['photoid'])) exit('Please select a image');
+include_once  $path_root . '/API/crud.php';
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/API/crud.php";
-
-$id_img = $_GET['photoid'];
-
-// Si pide visitas
-if(isset($_GET['views']) && isset($id_img)){
-    $response = $crud->query("SELECT VIEWS FROM vw_imgs WHERE ID_IMG = $id_img")[0][0];
-
-    http_response_code(200);
-    exit($response);
-
-// Si pide solo una imagen 
-} else if(isset($id_img)){
-    $response = $crud->query("SELECT IMG FROM vw_imgs WHERE ID_IMG = $id_img")[0][0];
+switch ($_GET['action']) {
+    case 'imgJPG':
+        include_once 'getData/getImg.php';
+        break;
     
-    if(!$response){
-        http_response_code(204);
-        exit();
-    }
-    
-    http_response_code(200);
-    header('Content-type: image/jpg');
-    exit($response);
-} 
+    case 'viewsImg':
+        include_once 'getData/getViewsImg.php';
+        break;
 
+    case 'listImgsId':
+        include_once 'getData/getListImgsId.php';
+        break;
+    
+    default:
+        echo 'Please define an action';
+        break;
+}
