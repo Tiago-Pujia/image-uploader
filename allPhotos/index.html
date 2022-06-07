@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Subir Imagenes</title>
+
+        <!-- Frameworks -->
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="/independences/bootstrap/bootstrap.min.css"/>
+            <script src="/independences/bootstrap/bootstrap.bundle.min.js"></script>
+
+            <!-- Bootstrap Icon -->
+            <link rel="stylesheet" href="/independences/bootstrap-icons/font/bootstrap-icons.css"/>
+
+            <!-- Fuente de Letra -->
+            <link rel="stylesheet" href="/independences/font-poppins.css"/>
+        
+        <!-- scripts -->
+        <script src="/scripts/HTMLInclude.js" defer></script>
+        <script src="/scripts/toast.js" defer></script>
+        <script src="index.js" defer></script>
+
+        <!-- Estilos Varios -->
+        <style>
+            body {
+                font-family: "Poppins", sans-serif;
+            }
+        </style>
+
+        <!-- Templates -->
+        <html-include src="/templates/toast.html"></html-include>
+    </head>
+    <body class="bg-light">
+        <html-include src="/templates/navbar.html"></html-include>
+        <main class="container-fluid">
+            <div class="d-flex row" id="main">
+                <div class="d-none order-1" id="noResults">
+                    Se terminaron los resultados
+                </div>    
+            </div>
+        </main>
+        <html-include src="/templates/footer.html"></html-include>
+    </body>
+</html>
