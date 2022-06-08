@@ -72,7 +72,7 @@ const createImgs = (listIds) => {
 };
 
 // Insertamos Imagenes en el documento
-const main = document.querySelector("#main");
+const gridGallery = document.querySelector("#gridGallery");
 
 // Indicamos la cantidad de imagenes maxima a obtener segun el viewport
 const limitIds = () => {
@@ -94,14 +94,14 @@ const limitIds = () => {
     return limit;
 };
 
-    // Función para insertar imagenes en el documento
+// Función para insertar imagenes en el documento
 const insertImgs = () => {
     listIds.limitIds = limitIds();
 
     listIds
         .getListImgIds()
         .then((response) => {
-            main.append(createImgs(response));
+            gridGallery.append(createImgs(response));
             loaderScroll.hide();
         })
         .catch((response) => {
@@ -129,5 +129,50 @@ const scrolled = () => {
     }
 };
 
-    // Insertar evento de esta manera para poder quitarlo despues
-document.onscroll = scrolled; 
+// Insertar evento de esta manera para poder quitarlo despues
+document.onscroll = scrolled;
+
+// Lanzar modal al hacer click en una imagen
+const modal = document.querySelector("#modalImg");
+const modalObj = new bootstrap.Modal(modal);
+
+gridGallery.addEventListener("click", (e) => {
+    // Activación si solo le dio click a un hipervinculo
+    const nodeClick = e.target;
+    if (nodeClick.nodeName != "A") return false;
+
+    // Elementos del modal
+    const photoId = nodeClick.hash.substr(1);
+    const tagImg = document.querySelector("#modal-img");
+    const tagViews = document.querySelector("#views");
+    const tagDownload = document.querySelector("#download");
+
+    // Cargamos la imagene, boton de descarga y boton para compartir
+    tagImg.setAttribute("src",`/API/index.php?action=imgJPG&photoid=${photoId}`);
+    tagImg.setAttribute("width", 400);
+    tagDownload.setAttribute("href",`/API/index.php?action=imgJPG&photoid=${photoId}`);
+
+    // Mostramos el numero de visitas
+    fetch(`/API/?action=viewsImg&photoid=${photoId}`, { method: "GET" })
+        .then((response) => response.text())
+        .then((response) => (tagViews.textContent = response));
+
+    // Mostrar cuando se termine de cargar
+    tagImg.addEventListener("load", () => {
+        modalObj.show();
+    });
+
+    // Sumar Visita
+    fetch("/API/index.php", {
+        method: "PUT",
+        body: JSON.stringify({ photoid: photoId }),
+    });
+});
+
+// Activamos los Tooltips
+const tooltipTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+    (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
