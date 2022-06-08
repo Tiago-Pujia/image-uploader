@@ -23,22 +23,27 @@
         <script src="index.js" defer></script>
 
         <!-- Estilos Varios -->
-        <style>
-            body {
-                font-family: "Poppins", sans-serif;
-            }
-        </style>
+        <link rel="stylesheet" href="index.css" />
 
         <!-- Templates -->
         <html-include src="/templates/toast.html"></html-include>
     </head>
     <body class="bg-light">
         <html-include src="/templates/navbar.html"></html-include>
-        <main class="container-fluid">
-            <div class="d-flex row" id="main">
-                <div class="d-none order-1" id="noResults">
-                    Se terminaron los resultados
-                </div>    
+        <main class="p-3">
+            <div class="grid-gallery" id="main">
+                <!-- 
+                    Estructura que se seguira: 
+                    <a class="grid-gallery-item" href="#12">
+                        <img class="grid-gallery-image" src="...">
+                    </a> 
+                -->
+            </div>
+            <div class="my-5 mx-auto d-none" style="width: 5rem; height: 5rem;" id="loader">
+                <span class="spinner-border spinner-border-lg text-primary w-100 h-100 text-center"></span>
+            </div>
+            <div class="d-none alert alert-danger mt-5 text-capitalize fw-bold" id="noResults">
+                <div class="alert-heading">Results are finished!!</div>
             </div>
         </main>
         <html-include src="/templates/footer.html"></html-include>

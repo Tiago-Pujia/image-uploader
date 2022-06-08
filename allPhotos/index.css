@@ -1,0 +1,78 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Galeria */
+.grid-gallery {
+    display: grid;
+    grid-auto-rows: 200px;
+    gap: 1rem;
+    grid-auto-flow: row dense;
+}
+
+.grid-gallery-item{
+    position: relative;
+}
+
+.grid-gallery-item:hover::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+}
+
+@media all and (min-width: 576px) {
+    .grid-gallery {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media all and (min-width: 768px) {
+    .grid-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media all and (min-width: 992px) {
+    .grid-gallery {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+.grid-gallery-item:nth-child(11n + 1) {
+    grid-column: span 1;
+}
+
+.grid-gallery-item:nth-child(11n + 4) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.grid-gallery-item:nth-child(11n + 6) {
+    grid-column: span 3;
+    grid-row: span 1;
+}
+
+.grid-gallery-item:nth-child(11n + 7) {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.grid-gallery-item:nth-child(11n + 8) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.grid-gallery-item:nth-child(11n + 9) {
+    grid-row: span 3;
+}
+
+.grid-gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
