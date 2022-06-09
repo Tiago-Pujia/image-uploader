@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Subir Imagenes</title>
+        <title>See All Photos</title>
 
         <!-- Frameworks -->
             <!-- Bootstrap -->
@@ -64,8 +64,8 @@
                                     Views: <span id="views"></span>
                                 </span>
                                 <div class="col-7 p-0 text-end">
-                                    <button class="btn btn-primary" id="shareLink" title="Share Photo" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-share"></i></button>
-                                    <input class="d-none" id="shareCopy" type="text" value="asd">
+                                        <input class="position-absolute top-0 left-0" style="z-index: -10; width: 0; height: 0; opacity: 1;" id="copyText" type="text"  readonly>
+                                    <button class="btn btn-primary" id="copyLink" title="Share Photo" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-share"></i></button>
                                     <a class="btn btn-primary" id="download" href="..." download="photo.jpg" title="Download" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-download"></i></a>     
                                 </div>    
                             </div>

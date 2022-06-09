@@ -120,17 +120,28 @@ insertImgs();
 // Insertamos mas imagenes al llegar al final del scroll
 const scrolled = () => {
     let viewportHeight = window.innerHeight;
-    let scrollHeight = scrollY;
-    let bodyHeight = document.querySelector("body").offsetHeight;
+    let scrollHeight = window.pageYOffset ;
+    let bodyHeight = document.querySelector("body").offsetHeight -2 ;
 
-    if (bodyHeight == scrollHeight + viewportHeight) {
+    if ((viewportHeight + scrollHeight) >= bodyHeight) {
         loaderScroll.show();
         insertImgs();
     }
 };
 
-// Insertar evento de esta manera para poder quitarlo despues
+    // Insertar evento de esta manera para poder quitarlo despues
 document.onscroll = scrolled;
+
+// Boton para copiar el link de compartir foto
+const buttonShareLink = document.querySelector("#copyLink");
+const inputCopyText = document.querySelector("#copyText");
+
+buttonShareLink.addEventListener("click", () => {
+    inputCopyText.select();
+    document.execCommand("copy");
+
+    createdToast("New Message", "Just Now", "Copied to clipboard successfully");
+});
 
 // Lanzar modal al hacer click en una imagen
 const modal = document.querySelector("#modalImg");
@@ -148,9 +159,12 @@ gridGallery.addEventListener("click", (e) => {
     const tagDownload = document.querySelector("#download");
 
     // Cargamos la imagene, boton de descarga y boton para compartir
-    tagImg.setAttribute("src",`/API/index.php?action=imgJPG&photoid=${photoId}`);
+    let photoUrl = `${location.origin}/API/index.php?action=imgJPG&photoid=${photoId}`;
+
     tagImg.setAttribute("width", 400);
-    tagDownload.setAttribute("href",`/API/index.php?action=imgJPG&photoid=${photoId}`);
+    tagImg.setAttribute("src", photoUrl);
+    tagDownload.setAttribute("href", photoUrl);
+    inputCopyText.value = `${location.origin}/previewPhoto/?photoid=${photoId}`;
 
     // Mostramos el numero de visitas
     fetch(`/API/?action=viewsImg&photoid=${photoId}`, { method: "GET" })

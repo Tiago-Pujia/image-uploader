@@ -9,5 +9,6 @@ if(!$response){
 
 http_response_code(200);
 header('Content-type: image/jpg');
+header("Content-Disposition: attachment; filename=photo.jpg");
 echo $response;
 ?>
