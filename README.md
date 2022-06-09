@@ -36,10 +36,28 @@ Para clonar y ejecutar esta aplicación, necesitará Git y un servidor para PHP 
 
 ```bash
 # Clonar este repositorio
-$ git clone https://github.com/your-user-name/your-project-name
+$ git clone https://github.com/Tiago-Pujia/image-uploader
 
 # Crear Base de Datos
 source ...\database\database.sql;
+```
+
+## Ruta de Archivos
+El proyecto esta formado por la siguiente ruta de carpetas:
+```
+-> Carpeta root
+    -> previewPhoto - Visualizador de fotos
+    -> AllPhotos - Ver todas las fotos
+
+    -> API - Backend
+    -> database - Archivos SQL
+
+    -> img - Imagenes
+    -> templates - Documentos HTML de template
+    -> scripts - Scripts de template
+    -> independences - FrameWorks y librerias
+
+    -> index.html y index.js - inicio de la pagina
 ```
 
 ## Contacto
