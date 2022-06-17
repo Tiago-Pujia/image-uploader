@@ -36,12 +36,7 @@ $fileResult = validateFileToImg($file);
 
 if($fileResult != 1){
     http_response_code(406);
-    exit(
-        json_encode([
-            'status' => 0, 
-            'response' => $fileResult
-        ])
-    );
+    exit($fileResult);
 }
 
 
@@ -51,7 +46,4 @@ $user_ip = $_SERVER['REMOTE_ADDR'];
 $insertImg = $crud->insertBlob($user_image_path,$user_ip);
 
 http_response_code(201);
-echo json_encode([
-    'status' => 1, 
-    'response' => "http://$server_name/previewPhoto?photoid=$insertImg"
-]);
+echo $insertImg;

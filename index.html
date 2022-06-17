@@ -28,9 +28,10 @@
                 font-family: "Poppins", sans-serif;
             }
 
-            #formCard1:hover > label,
             #labelCard:hover,
-            #labelCard:hover img{
+            #formCard1:hover > label,
+            #labelCard:hover img,
+            .formDrag{
                 background-color: var(--bs-gray-200) !important;
                 cursor: pointer;
             }
@@ -54,11 +55,12 @@
                         <p class="text-muted my-4">
                             File should be Jpeg, Png, ...
                         </p>
-                        <form class="my-3 px-5 needs-validation" style="height: 250px;" id="formCard1" enctype="multipart/form-data" novalidate>
+                        <form class="mt-3 px-5 needs-validation" style="height: 250px;" id="formCard1" enctype="multipart/form-data" novalidate>
                             <label
                                 class="
                                 border border-info rounded bg-light w-100 h-100 mx-auto 
                                 row flex-column align-items-center justify-content-evenly
+                                position-relative
                                 "
                                 style="
                                     border-style: dashed !important;
@@ -71,16 +73,17 @@
                                 <p class="text-secondary text-center m-0">
                                         Drag & Drop your image here
                                 </p>
+                                <input
+                                    class="w-100 h-100 position-absolute top-0 left-0 opacity-0"
+                                    id="inputFile"
+                                    name="img"
+                                    type="file"
+                                    accept="image/jpg, image/png, image/jpeg"
+                                    required
+                                />
                             </label>
 
-                            <input
-                                class="d-none"
-                                id="inputFile"
-                                name="img"
-                                type="file"
-                                accept="image/jpg, image/png, image/jpeg"
-                                required
-                            />
+                            
                             <div class="invalid-feedback mb-3">Error</div>
                         </form>
                         <p class="text-muted my-4">Or</p>

@@ -48,29 +48,25 @@
         </main>
 
         <div class="modal fade" id="modalImg">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" data-bs-backdrop="static">
-                <div class="modal-dialog">
+            <div class="modal-dialog modal-lg modal-dialog-centered" data-bs-backdrop="static">
+                <div class="modal-content shadow" style="border-radius: 10px;">
+                    
+                    <div class="modal-header p-0">
+                        <img class="img-fluid rounded-top" src="..." alt="Error Carga de Imagen" id="modal-img">
+                        <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3" id="modal-close" data-bs-dismiss="modal"></button>
+                    </div>
 
-                    <div class="modal-content shadow" style="border-radius: 10px;">
-
-                        <div class="modal-header p-0">
-                            <img class="img-fluid rounded-top" src="..." alt="Error Carga de Imagen" id="modal-img">
-                            <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3" id="modal-close" data-bs-dismiss="modal"></button>
+                    <div class="modal-body">
+                        <div class="row w-100 mx-auto">
+                            <span class="col-5 p-0 ps-2 text-muted text-decoration-underline">
+                                Views: <span id="views"></span>
+                            </span>
+                            <div class="col-7 p-0 text-end">
+                                    <input class="position-absolute top-0 left-0" style="z-index: -10; width: 0; height: 0; opacity: 1;" id="copyText" type="text"  readonly>
+                                <button class="btn btn-primary" id="copyLink" title="Share Photo" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-share"></i></button>
+                                <a class="btn btn-primary" id="download" href="..." download="photo.jpg" title="Download" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-download"></i></a>     
+                            </div>    
                         </div>
-
-                        <div class="modal-body">
-                            <div class="row w-100 mx-auto">
-                                <span class="col-5 p-0 ps-2 text-muted text-decoration-underline">
-                                    Views: <span id="views"></span>
-                                </span>
-                                <div class="col-7 p-0 text-end">
-                                        <input class="position-absolute top-0 left-0" style="z-index: -10; width: 0; height: 0; opacity: 1;" id="copyText" type="text"  readonly>
-                                    <button class="btn btn-primary" id="copyLink" title="Share Photo" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-share"></i></button>
-                                    <a class="btn btn-primary" id="download" href="..." download="photo.jpg" title="Download" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="bi bi-download"></i></a>     
-                                </div>    
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
