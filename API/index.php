@@ -1,7 +1,5 @@
 <?php
 
-http_response_code(400);
-
 $server_name = $_SERVER['SERVER_NAME'];
 $path_root = $_SERVER['DOCUMENT_ROOT'];
 

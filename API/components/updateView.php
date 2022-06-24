@@ -1,14 +1,21 @@
 <?php
-// Como no hay una variable para el metodo PUT lo creamos
-$_PUT = get_object_vars(json_decode(file_get_contents("php://input")));
+try {
+    // Como no hay una variable para el metodo PUT lo creamos
+    $_PUT = get_object_vars(json_decode(file_get_contents("php://input")));
+    $photoid = intval($_PUT['photoid']);
+    $sql = "CALL addView($photoid)";
+    
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/API/crud.php';
+    $crud->store_procedure($sql);
 
-if (!isset($_PUT['photoid'])) return('Please select a image');
+    http_response_code(204);
+} catch (\Throwable $th) {
+    http_response_code(500);
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/API/crud.php";
+    if (!isset($_PUT['photoid'])) {
+        http_response_code(400);
+        exit('Select a image');
+    };
 
-// Sumamos a la BD una visita a una imagen
-$photoid = intval($_PUT['photoid']);
-
-$crud->store_procedure("CALL addView($photoid)");
-
-http_response_code(204);
+    exit('Error');
+}

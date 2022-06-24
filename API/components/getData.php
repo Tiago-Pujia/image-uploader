@@ -1,7 +1,5 @@
 <?php
-if(!isset($_GET['action'])) exit('Please define an action');;
-
-include_once  $path_root . '/API/crud.php';
+if(!isset($_GET['action'])) exit('Please define an action');
 
 switch ($_GET['action']) {
     case 'imgJPG':

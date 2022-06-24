@@ -1,13 +1,4 @@
 <?php
-
-if (!isset($_FILES['img'])) return('Please select a image');
-
-include_once $_SERVER['DOCUMENT_ROOT'] . "/API/crud.php";
-
-header("Content-type: application/json");
-
-$file = $_FILES['img'];
-
 // Validación de Datos
 function validateFileToImg($file){
     if($file['error'] != 0) return('The image contains errors');
@@ -32,18 +23,37 @@ function validateFileToImg($file){
     return 1;
 }
 
-$fileResult = validateFileToImg($file);
+try {
+    $file = $_FILES['img'];
+    $fileResult = validateFileToImg($file);
+    if($fileResult != 1){
+        throw new Exception();
+    }
 
-if($fileResult != 1){
-    http_response_code(406);
-    exit($fileResult);
+    $user_image_path = $file['tmp_name'];
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+
+    include_once $path_root . '/API/crud.php';
+    $insertImg = $crud->insertBlob($user_image_path,$user_ip);
+
+    http_response_code(201);
+    header('Content-type: application/json');
+    echo $insertImg;
+
+} catch (\Throwable $th) {
+    http_response_code(500);
+
+    if(!isset($_FILES['img']) || empty($_FILES['img'])){
+        http_response_code(400);
+        exit('Define a img');
+    }
+
+    $fileResult = validateFileToImg($file);
+
+    if($fileResult != 1){
+        http_response_code(400);
+        exit($fileResult);
+    }
+
+    exit('Error');
 }
-
-
-// Insertar Datos en la BD
-$user_image_path = $file['tmp_name'];
-$user_ip = $_SERVER['REMOTE_ADDR'];
-$insertImg = $crud->insertBlob($user_image_path,$user_ip);
-
-http_response_code(201);
-echo $insertImg;

@@ -78,8 +78,7 @@ const formCompleteSubmit = () => {
 
     changeCard("cardLoad");
     activateProgressBar();
-    setTimeout(()=>{
-        submitData()
+    submitData()
         .then((response) => response.text())
         .then((response) => {
             urlResult.value = `${location.origin}/previewPhoto/?photoid=${response}`;
@@ -95,8 +94,6 @@ const formCompleteSubmit = () => {
 
             changeCard("cardForm");
         });
-
-    },3000)
 };
 
 inputFile.addEventListener("change", formCompleteSubmit);
