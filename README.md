@@ -22,8 +22,13 @@ La idea de este proyecto es crear una aplicación que permite que un cliente ing
 
 ### Construido con
 
+-   HTML
+-   CSS
+-   JavaScript
 -   [Bootstrap](https://getbootstrap.com/)
 -   [Bootstrap-Icons](https://icons.getbootstrap.com/)
+-   PHP
+-   MySQL
 
 ## Características
 
@@ -36,7 +41,7 @@ Para clonar y ejecutar esta aplicación, necesitará Git y un servidor para PHP 
 
 ```bash
 # Clonar este repositorio
-$ git clone https://github.com/Tiago-Pujia/image-uploader
+$ git clone https://github.com/tiago-pujia/image-uploader
 
 # Crear Base de Datos
 source ...\database\database.sql;

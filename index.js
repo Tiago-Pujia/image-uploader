@@ -79,13 +79,9 @@ const formCompleteSubmit = () => {
     changeCard("cardLoad");
     activateProgressBar();
     submitData()
-        .then((response) => response.json())
+        .then((response) => response.text())
         .then((response) => {
-            if (response.status != 1) throw new Error(response.response);
-            return response.response;
-        })
-        .then((response) => {
-            urlResult.value = response;
+            urlResult.value = `${location.origin}/previewPhoto/?photoid=${response}`;
             previewImg();
         })
         .then(() => changeCard("cardResult"))
@@ -110,3 +106,11 @@ buttonCopyLink.addEventListener("click", () => {
     document.execCommand("copy");
     createdToast("New Message", "Just Now", "Copied to clipboard successfully");
 });
+
+// ===============
+
+const labelInput = document.querySelector('#labelCard');
+
+inputFile.addEventListener('dragenter',() =>  labelInput.classList.add('formDrag'))
+inputFile.addEventListener('dragleave',() =>  labelInput.classList.remove('formDrag'))
+inputFile.addEventListener('drop',() =>  labelInput.classList.remove('formDrag'))

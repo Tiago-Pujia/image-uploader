@@ -1,5 +1,29 @@
-// Metodos para mostrar u ocular el cargador de imagenes al scroll
+// Función para obtener determinado resultado dependiendo del breakpoint del viewport
+const resultsRWD = (
+    xl = false,
+    lg = false,
+    md = false,
+    sm = false,
+    xs = false
+) => {
+    let windowWidth = window.innerWidth;
 
+    if (windowWidth >= 1200) {
+        return xl;
+    } else if (windowWidth >= 992) {
+        return lg;
+    } else if (windowWidth >= 768) {
+        return md;
+    } else if (windowWidth >= 576) {
+        return sm;
+    } else if (windowWidth < 576) {
+        return xs;
+    }
+
+    return '';
+};
+
+// Metodos para mostrar u ocular el cargador de imagenes al scroll
 const loaderScroll = {
     loader: document.querySelector("#loader"),
 
@@ -64,6 +88,10 @@ const createImgs = (listIds) => {
         newImg.setAttribute("src", src);
         newImg.classList.add("grid-gallery-image");
 
+        newImg.addEventListener("error", function () {
+            this.parentElement.classList.add("d-none");
+        });
+
         newA.append(newImg);
         documentFragment.append(newA);
     });
@@ -71,32 +99,12 @@ const createImgs = (listIds) => {
     return documentFragment;
 };
 
-// Insertamos Imagenes en el documento
-const gridGallery = document.querySelector("#gridGallery");
-
-// Indicamos la cantidad de imagenes maxima a obtener segun el viewport
-const limitIds = () => {
-    let limit;
-    let windowWidth = window.innerWidth;
-
-    if (windowWidth >= 1200) {
-        limit = 50;
-    } else if (windowWidth >= 992) {
-        limit = 40;
-    } else if (windowWidth >= 768) {
-        limit = 30;
-    } else if (windowWidth >= 576) {
-        limit = 21;
-    } else if (windowWidth < 576) {
-        limit = 22;
-    }
-
-    return limit;
-};
 
 // Función para insertar imagenes en el documento
+const gridGallery = document.querySelector("#gridGallery");
+
 const insertImgs = () => {
-    listIds.limitIds = limitIds();
+    listIds.limitIds = resultsRWD(50, 40, 30, 21, 22);
 
     listIds
         .getListImgIds()
@@ -115,21 +123,19 @@ const insertImgs = () => {
     return true;
 };
 
-insertImgs();
-
 // Insertamos mas imagenes al llegar al final del scroll
 const scrolled = () => {
     let viewportHeight = window.innerHeight;
-    let scrollHeight = window.pageYOffset ;
-    let bodyHeight = document.querySelector("body").offsetHeight -2 ;
+    let scrollHeight = window.pageYOffset;
+    let bodyHeight = document.querySelector("body").offsetHeight - 2;
 
-    if ((viewportHeight + scrollHeight) >= bodyHeight) {
+    if (viewportHeight + scrollHeight >= bodyHeight) {
         loaderScroll.show();
         insertImgs();
     }
 };
 
-    // Insertar evento de esta manera para poder quitarlo despues
+// Insertar evento de esta manera para poder quitarlo despues
 document.onscroll = scrolled;
 
 // Boton para copiar el link de compartir foto
@@ -161,7 +167,7 @@ gridGallery.addEventListener("click", (e) => {
     // Cargamos la imagene, boton de descarga y boton para compartir
     let photoUrl = `${location.origin}/API/index.php?action=imgJPG&photoid=${photoId}`;
 
-    tagImg.setAttribute("width", 400);
+    tagImg.setAttribute("width", 1000);
     tagImg.setAttribute("src", photoUrl);
     tagDownload.setAttribute("href", photoUrl);
     inputCopyText.value = `${location.origin}/previewPhoto/?photoid=${photoId}`;
@@ -190,3 +196,10 @@ const tooltipTriggerList = document.querySelectorAll(
 const tooltipList = [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
 );
+
+// =======================================
+// Activación de la carga de imagenes
+// =======================================
+
+loaderScroll.show();
+insertImgs();
