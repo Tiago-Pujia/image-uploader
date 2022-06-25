@@ -9,10 +9,14 @@ try {
     $response = $crud->query($sql);
     $response = array_map(fn($el)=>intval($el[0]),$response);
 
-    echo json_encode($response);
-    http_response_code($response ? 200 : 204);
-    header('Content-type: application/json');
+    if(empty($response)){
+        http_response_code(204);
+        exit();
+    }
 
+    echo json_encode($response);
+    http_response_code(200);
+    header('Content-type: application/json');
 } catch (\Throwable $th) {
     http_response_code(500);
     
